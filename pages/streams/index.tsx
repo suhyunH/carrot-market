@@ -4,14 +4,15 @@ import FloatingBtn from '../../components/floating-button';
 import Layout from '../../components/layout';
 
 const Live: NextPage =()=>{
-    return<Layout title='라이브' hasTabBar>
+    return(
+    <Layout title='라이브' hasTabBar>
 
-    <div className='py-10 divide-y-2 space-y-4'>
+    <div className='space-y-4 divide-y-[1px]'>
         {[1,1,1,1,1].map((_,i)=>(
             <Link href={`/streams/${i}`} key={i}>
-                <a className="pt-4 px-4">
+                <a className="pt-4 block px-4">
                     <div className='w-full rounded-md shadow-sm bg-slate-300 aspect-video' />
-                    <h3 className=' text-gray-700 text-lg mt-2'>Let's try potatos</h3>
+                    <h1 className=' text-gray-700 text-lg mt-2'>Let's try potatos</h1>
                 </a>
             </Link>
         ))}
@@ -21,5 +22,5 @@ const Live: NextPage =()=>{
       </FloatingBtn>
     </div>
     </Layout>
-}
+    )}
 export default Live;

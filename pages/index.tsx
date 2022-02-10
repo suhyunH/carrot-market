@@ -9,7 +9,7 @@ const Home: NextPage = () => {
 
     <div className='flex flex-col space-y-5'>
      {[1,2,3,4,5,6].map((_,i)=>(
-       <Item id={i} title="New iPhone 14" subtitle='Black' price={95} heart={1} comment={1} />
+       <Item id={i} title="New iPhone 14" subtitle='Black' price={95} heart={1} comment={1} key={i}/>
      ))}
  
       <FloatingBtn href="/items/upload">
