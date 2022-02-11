@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <Layout title='홈' hasTabBar>
 
-    <div className='flex flex-col space-y-5'>
+    <div className='flex flex-col'>
      {[1,2,3,4,5,6].map((_,i)=>(
        <Item id={i} title="New iPhone 14" subtitle='Black' price={95} heart={1} comment={1} key={i}/>
      ))}
