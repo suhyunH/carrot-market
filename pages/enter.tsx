@@ -1,36 +1,64 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import Button from '../components/button';
+import Input from '../components/input';
 import { cls } from '../libs/utils';
 
+interface EnterForm{
+    email?:string;
+    phone?:string;
+}
 export default function Enter(){
+    const {register, watch, reset, handleSubmit} = useForm<EnterForm>()
     const [method, setMethod] = useState<"email"|"phone">("email");
-    const onEmailClick = ()=>setMethod("email");
-    const onPhoneClick =()=>setMethod("phone");
+    const onEmailClick = ()=>{
+        reset();
+        setMethod("email")
+    };
+    const onPhoneClick =()=>{
+        reset();
+        setMethod("phone")
+    };
+
+    const onValid=(data:EnterForm)=>{
+        console.log(data)
+    }
+
+    console.log(watch())
+    
     return(
         <div className='mt-16 px-4'>
             <h3 className='text-3xl font-bold text-center'>Enter the carrot</h3>
             <div className='mt-8'>
                 <div className='flex flex-col items-center'>
                     <h5 className='text-sm text-gray-500 font-medium'>Enter using:</h5>
-                    <div className='grid grid-cols-2 gap-16 mt-8  border-b w-full'>
+                    <div className='grid grid-cols-2 mt-8  border-b w-full'>
                         <button className={cls("pb-4 border-b-2 font-medium", method==="email" ? "border-orange-500 text-orange-400" : "text-gray-500 border-transparent")} onClick={onEmailClick}>Email address</button>
                         <button className={cls("pb-4 border-b-2 font-medium", method==="phone" ? "border-orange-500 text-orange-400" : "text-gray-500 border-transparent")} onClick={onPhoneClick}>Phone number</button>
                     </div>
                 </div>
-                <form className='flex flex-col mt-8'>
-                    <label htmlFor='input' className='text-sm font-medium text-gray-700'>
-                        {method ==="email"? "Email address" : null}
-                        {method ==="phone"? "Phone number":null}
-                    </label>
-                    <div className='mt-1'>
-                    {method ==="email"? <input id="id" type="email" required className='appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500'/>: null}
-                        {method ==="phone"? (
-                            <div className='flex rounded-md shadow-sm'>
-                                <span className='flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500'>+82</span>
-                                <input id="id" type="number" required className='appearance-none w-full px-3 py-2 border border-gray-300 rounded-md rounded-l-none shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500'/>
-                            </div>
-                        ):null}
-                    </div>
+                <form className='flex flex-col mt-8' onSubmit={handleSubmit(onValid)}>
+                   
+                    {method ==="email"? 
+                    <Input 
+                    register={register("email")}
+                    name="email"
+                    label="Email address"
+                    type="email"
+                    required
+                    />
+                    : null}
+                        {method ==="phone"? 
+                        <Input
+                        register={register("phone")}
+                        name="phone"
+                        label="Phone number"
+                        type="number"
+                        kind="phone"
+                        required
+                        />
+                        :null}
+    
               
                     <Button text={method ==="email"? "Get Login Link" :"Get one-time password"}/>
                 </form>
