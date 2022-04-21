@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../components/button';
 import Input from '../components/input';
-import { cls } from '../libs/utils';
+import useMutation from '../libs/client/useMutation';
+import { cls } from '../libs/client/utils';
 
 interface EnterForm{
     email?:string;
     phone?:string;
 }
 export default function Enter(){
+    const [enter, {loading, data, error}] = useMutation("api/users/enter");
     const [submitting, setSubmitting] = useState(false)
     const {register, watch, reset, handleSubmit} = useForm<EnterForm>()
     const [method, setMethod] = useState<"email"|"phone">("email");
@@ -22,15 +24,7 @@ export default function Enter(){
     };
 
     const onValid=(data:EnterForm)=>{
-        setSubmitting(true)
-        fetch("/api/users/enter", {
-            method:"POST",
-            body:JSON.stringify(data),
-            //api/user/enter에서 req.body이 아닌 req.body.email로 했을 때도 받을 수 있도록 만들기 위해선 headers를 넣어야 함.
-            headers:{
-                "Content-Type":"application/json",
-            }
-        }).then(()=>setSubmitting(false));
+        enter(data);
     }
 
     console.log(watch())
