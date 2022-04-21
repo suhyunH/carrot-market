@@ -9,6 +9,7 @@ interface EnterForm{
     phone?:string;
 }
 export default function Enter(){
+    const [submitting, setSubmitting] = useState(false)
     const {register, watch, reset, handleSubmit} = useForm<EnterForm>()
     const [method, setMethod] = useState<"email"|"phone">("email");
     const onEmailClick = ()=>{
@@ -21,7 +22,15 @@ export default function Enter(){
     };
 
     const onValid=(data:EnterForm)=>{
-        console.log(data)
+        setSubmitting(true)
+        fetch("/api/users/enter", {
+            method:"POST",
+            body:JSON.stringify(data),
+            //api/user/enter에서 req.body이 아닌 req.body.email로 했을 때도 받을 수 있도록 만들기 위해선 headers를 넣어야 함.
+            headers:{
+                "Content-Type":"application/json",
+            }
+        }).then(()=>setSubmitting(false));
     }
 
     console.log(watch())
@@ -59,8 +68,9 @@ export default function Enter(){
                         />
                         :null}
     
-              
-                    <Button text={method ==="email"? "Get Login Link" :"Get one-time password"}/>
+                    {method ==="email" ? <Button text={submitting?"Loading": "Get Login Link"} /> : null}
+                    {method ==="phone" ? <Button text={submitting ?"Loading" : "Get one-time password"}/> : null}
+
                 </form>
                 <div className='mt-8'>
                     <div className='relative'>
