@@ -23,11 +23,11 @@ export default function Enter(){
         setMethod("phone")
     };
 
-    const onValid=(data:EnterForm)=>{
-        enter(data);
+    const onValid=(validForm:EnterForm)=>{
+        enter(validForm);
     }
 
-    console.log(watch())
+    console.log(loading, data, error)
     
     return(
         <div className='mt-16 px-4'>
