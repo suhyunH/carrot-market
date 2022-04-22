@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
-import Button from '../../components/button';
-import Input from '../../components/input';
-import Layout from '../../components/layout';
-import TextArea from '../../components/textArea';
+import Button from '@components/button';
+import Input from '@components/input';
+import Layout from '@components/layout';
+import TextArea from '@components/textArea';
 interface CreateForm{
     name:string;
     price:string;
