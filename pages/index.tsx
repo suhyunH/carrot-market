@@ -16,7 +16,7 @@ const Home: NextPage = () => {
        <Item id={i} title="New iPhone 14" subtitle='Black' price={95} heart={1} comment={1} key={i}/>
      ))}
  
-      <FloatingBtn href="/items/upload">
+      <FloatingBtn href="/products/upload">
         <svg
           className="h-6 w-6"
           xmlns="http://www.w3.org/2000/svg"

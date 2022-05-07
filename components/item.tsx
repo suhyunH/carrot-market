@@ -10,7 +10,7 @@ interface ItemProps{
 }
 export default function Item({title, subtitle, price, heart, comment,id}:ItemProps){
     return(
-        <Link href={`/items/${id}`} >
+        <Link href={`/products/${id}`} >
                 <a  className="flex px-4 pt-4 border-b pb-4 cursor-pointer justify-between hover:bg-slate-100">
                 <div className='flex space-x-4'>
                 <div className='w-20 h-20 bg-gray-400 rounded-md'/>
