@@ -23,15 +23,17 @@ const Upload: NextPage = () => {
    const router = useRouter();
    const {register, handleSubmit} = useForm<UploadProductForm>();
    const [uploadProduct, {loading, data}] = useMutation<UploadProductMutation>("/api/products");
+   
    const onValid =(data:UploadProductForm)=>{
     if(loading) return; 
-    uploadProduct(data)
+    uploadProduct(data);
+    console.log(data);
    };
    useEffect(()=>{
     if(data?.ok){
       router.push(`/products/${data.product.id}`)
     }
-   },[data])
+   },[data, router])
    return (
      <Layout canGoBack title='Upload Product'>
         <form className='p-4 space-y-4' onSubmit={handleSubmit(onValid)}>
