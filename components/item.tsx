@@ -2,13 +2,12 @@ import Link from 'next/link';
 
 interface ItemProps{
     title:string;
-    subtitle:string;
     price:number;
     heart:number;
     comment:number;
     id:number;
 }
-export default function Item({title, subtitle, price, heart, comment,id}:ItemProps){
+export default function Item({title, price, heart, comment,id}:ItemProps){
     return(
         <Link href={`/products/${id}`} >
                 <a  className="flex px-4 pt-4 border-b pb-4 cursor-pointer justify-between hover:bg-slate-100">
@@ -16,7 +15,6 @@ export default function Item({title, subtitle, price, heart, comment,id}:ItemPro
                 <div className='w-20 h-20 bg-gray-400 rounded-md'/>
                 <div className='pt-2 flex flex-col'>
                     <h3 className='text-sm font-medium text-gray-900'>{title}</h3>
-                    <span className='text-xs text-gray-500'>{subtitle}</span>
                     <span className='font-medium mt-1 text-gray-900'>${price}</span>
                 </div>
                 </div>
