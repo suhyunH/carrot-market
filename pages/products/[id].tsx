@@ -76,7 +76,7 @@ const ItemDetail: NextPage=()=>{
               <div>
                 <div className='h-56 w-full mb-4 bg-slate-300'/>
                 <h3 className='text-gray-700 -mb-1'>{product.name}</h3>
-                <span className='text-sm font-medium text-gray-900'>{product.price}</span>
+                <span className='text-sm font-medium text-gray-900'>${product.price}</span>
               </div>
             </Link>
         </div>
